@@ -6,7 +6,7 @@ const sequelize = new Sequelize('projet4a_emo_record', 'root', '', {
   operatorsAliases: false,
 
   pool: {
-    max: 5,
+    max: 6,
     min: 0,
     acquire: 30000,
     idle: 10000
