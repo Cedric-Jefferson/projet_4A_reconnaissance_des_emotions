@@ -5,8 +5,10 @@ class Register extends Component {
   constructor() {
     super()
     this.state = {
-      first_name: '',
-      last_name: '',
+      genre: '',
+      tranche_d_age: '',
+      pays: '',
+      ville: '',
       email: '',
       password: '',
       errors: {}
@@ -23,8 +25,10 @@ class Register extends Component {
     e.preventDefault()
 
     const newUser = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
+      genre: this.state.genre,
+      tranche_d_age: this.state.tranche_d_age,
+      pays: this.state.pays,
+      ville: this.state.ville,
       email: this.state.email,
       password: this.state.password
     }
@@ -40,47 +44,69 @@ class Register extends Component {
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
             <form noValidate onSubmit={this.onSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal">Register</h1>
+              <h1 className="h3 mb-3 font-weight-normal">Inscription</h1>
               <div className="form-group">
-                <label htmlFor="name">First name</label>
+                <label htmlFor="genre">Genre</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="first_name"
-                  placeholder="Enter your first name"
-                  value={this.state.first_name}
+                  name="genre"
+                  placeholder="Entrez votre sexe"
+                  value={this.state.genre}
                   onChange={this.onChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="name">Last name</label>
+                <label htmlFor="tranche_d_age">Tranche d'âge</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="last_name"
-                  placeholder="Enter your lastname name"
-                  value={this.state.last_name}
+                  name="tranche_d_age"
+                  placeholder="Entrez votre tranche d'âge"
+                  value={this.state.tranche_d_age}
                   onChange={this.onChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
+              <label htmlFor="pays">Pays d'origine</label>
+              <input
+                type="text"
+                className="form-control"
+                name="pays"
+                placeholder="Entrez votre pays d'origine"
+                value={this.state.pays}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className="form-group">
+            <label htmlFor="ville">Ville d'origine</label>
+            <input
+              type="text"
+              className="form-control"
+              name="ville"
+              placeholder="Entrez votre ville d'origine"
+              value={this.state.ville}
+              onChange={this.onChange}
+            />
+          </div>
+              <div className="form-group">
+                <label htmlFor="email">Mail</label>
                 <input
                   type="email"
                   className="form-control"
                   name="email"
-                  placeholder="Enter email"
+                  placeholder="Entrez votre email"
                   value={this.state.email}
                   onChange={this.onChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Mot de passe</label>
                 <input
                   type="password"
                   className="form-control"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Mot de passe"
                   value={this.state.password}
                   onChange={this.onChange}
                 />
@@ -89,7 +115,7 @@ class Register extends Component {
                 type="submit"
                 className="btn btn-lg btn-primary btn-block"
               >
-                Register!
+                S'inscrire!
               </button>
             </form>
           </div>

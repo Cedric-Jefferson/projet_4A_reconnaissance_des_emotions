@@ -9,10 +9,16 @@ module.exports = db.sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
-    first_name: {
+    genre: {
       type: Sequelize.STRING
     },
-    last_name: {
+    tranche_d_age: {
+      type: Sequelize.STRING
+    },
+    pays: {
+      type: Sequelize.STRING
+    },
+    ville: {
       type: Sequelize.STRING
     },
     email: {
@@ -20,10 +26,6 @@ module.exports = db.sequelize.define(
     },
     password: {
       type: Sequelize.STRING
-    },
-    created: {
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
     }
   },
   {
