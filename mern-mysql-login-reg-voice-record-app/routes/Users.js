@@ -10,7 +10,7 @@ users.use(cors())
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register', (req, res) => {
-  const today = new Date()
+  //const today = new Date()
   const userData = {
     genre: req.body.genre,
     tranche_d_age: req.body.tranche_d_age,

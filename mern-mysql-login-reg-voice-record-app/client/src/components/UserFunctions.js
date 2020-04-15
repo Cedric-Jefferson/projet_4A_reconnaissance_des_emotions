@@ -26,6 +26,6 @@ export const login = user => {
       return response.data
     })
     .catch(err => {
-      console.log(err)
+      console.log( err.response.request._response)
     })
 }
