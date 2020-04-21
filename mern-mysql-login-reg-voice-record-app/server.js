@@ -1,9 +1,8 @@
-/*var express = require('express')
+var express = require('express')
 var cors = require('cors')
 var bodyParser = require('body-parser')
 var app = express()
 var port = process.env.PORT || 5000
-var serveStatic = require('serve-static'); 
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -15,7 +14,7 @@ app.use(
 
 var Users = require('./routes/Users')
 
-app.use('/users', Users)*/
+app.use('/users', Users)
 //app.use(express.static('./routes/Users'));
 
 /*app.options('./routes/Users/:id', cors()) // enable pre-flight request for DELETE request
@@ -45,24 +44,24 @@ app.post('/users', jsonParser, function (req, res) {
   // create user in req.body
 })*/
 
-/*app.listen(port, function() {
+app.listen(port, function() {
   console.log('Server is running on port: ' + port)
-})*/
+})
 
 
-const http        = require('http')
+/*const http        = require('http')
 const express     = require('express')
 const bodyParser  = require('body-parser')
 const morgan      = require('morgan')
 const cors        = require('cors')
 const app         = module.exports = express()
 const server      = http.createServer(app)
-const port        = parseInt(process.env.PORT || 5000)
+const port        = parseInt(process.env.PORT || 5000)*/
 
 /*const db = require('./database/db.js')
 db.on('error', console.error.bind(console, 'MySQL connection error:'))*/
 
-app.use(bodyParser.json())
+/*app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('dev'))
 app.use(cors({origin: true}))
@@ -87,4 +86,4 @@ function errorHandler(err, req, res, next) {
   console.error('ERROR', err)
   res.status(500)
     .send({error: err, url: req.url, status: 500})
-}
+}*/
