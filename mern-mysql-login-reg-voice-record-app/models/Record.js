@@ -2,29 +2,23 @@ const Sequelize = require('sequelize')
 const db = require('../database/db')
 
 module.exports = db.sequelize.define(
-  'user',
+  'record',
   {
-    id_user: {
+    id_record: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    genre: {
+    record: {
+      type: Sequelize.VARBINARY
+    },
+    version_record: {
       type: Sequelize.STRING
     },
-    tranche_d_age: {
+    ref_micro_record: {
       type: Sequelize.STRING
     },
-    pays: {
-      type: Sequelize.STRING
-    },
-    ville: {
-      type: Sequelize.STRING
-    },
-    email: {
-      type: Sequelize.STRING
-    },
-    password: {
+    ref_device_record: {
       type: Sequelize.STRING
     }
   },

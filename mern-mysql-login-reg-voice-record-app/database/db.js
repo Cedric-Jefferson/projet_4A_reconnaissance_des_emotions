@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = {}
-const sequelize = new Sequelize('projet4a_emo_record', 'root', '', {
+const sequelize = new Sequelize('projet_4a_emorecog_bd', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   "port": "3308",
