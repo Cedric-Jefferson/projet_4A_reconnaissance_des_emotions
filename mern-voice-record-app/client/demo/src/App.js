@@ -8,6 +8,8 @@ import Register from './components/Register'
 import Profile from './components/Profile'
 import AudioRecorder from './components/AudioRecorder'
 
+require('./App.css')
+
 class App extends Component {
   render() {
     return (
@@ -20,7 +22,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/audiorecorder" component={AudioRecorder} />
-            </div>
+          </div>
         </div>
       </Router>
     )

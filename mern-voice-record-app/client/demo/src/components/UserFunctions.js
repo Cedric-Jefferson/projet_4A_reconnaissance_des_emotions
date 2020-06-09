@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from 'axios/dist/axios'
 
 export const register = newUser => {
   return axios
-    .post('users/register', {
+    .post('http://localhost:5000/users/register', {
       genre: newUser.genre,
       tranche_d_age: newUser.tranche_d_age,
       pays: newUser.pays,
@@ -17,7 +17,7 @@ export const register = newUser => {
 
 export const login = user => {
   return axios
-    .post('users/login', {
+    .post('http://localhost:5000/users/login', {
       email: user.email,
       password: user.password
     })
