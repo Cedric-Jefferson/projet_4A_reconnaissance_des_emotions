@@ -10,7 +10,7 @@ module.exports = db.sequelize.define(
       autoIncrement: true
     },
     record: {
-      type: Sequelize.VARBINARY
+      type: Sequelize.BLOB
     },
     version_record: {
       type: Sequelize.STRING

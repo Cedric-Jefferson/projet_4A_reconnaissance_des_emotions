@@ -29,3 +29,21 @@ export const login = user => {
       console.log( err.response.request._response)
     })
 }
+
+export const audiorecorder = newRecord => {
+  return axios
+    .post('http://localhost:5000/records/audiorecorder', {
+      record: newRecord.record,
+      version_record: newRecord.version_record,
+      ref_micro_record: newRecord.ref_micro_record,
+      ref_device_record: newRecord.ref_device_record
+    })
+    .then(response => {
+      console.log('Record registered')
+      localStorage.setItem('usertoken', response.data)
+      return response.data
+    })
+    .catch(err => {
+      console.log( err.response.request._response)
+    })
+}

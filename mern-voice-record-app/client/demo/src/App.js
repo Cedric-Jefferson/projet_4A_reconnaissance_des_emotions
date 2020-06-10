@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
 import AudioRecorder from './components/AudioRecorder'
+import AudioList from './components/AudioList'
 
 require('./App.css')
 
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/audiorecorder" component={AudioRecorder} />
+            <Route exact path="/audiolist" component={AudioList} />
           </div>
         </div>
       </Router>

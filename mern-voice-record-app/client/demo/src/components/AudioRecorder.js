@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ReactMic } from '../../../src'
+import { audiorecorder } from './UserFunctions'
 
 require('./styles.scss')
 
@@ -8,10 +9,36 @@ class AudioRecorder extends Component {
     super(props)
     this.state = {
       downloadLinkURL: null,
+      blobObject: null,
       isRecording: false,
       recordingStarted: false,
-      recordingStopped: false
+      recordingStopped: false,
+      record: null,
+      version_record: '',
+      ref_micro_record:'',
+      ref_device_record:''
     }
+
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+  onSubmit(e) {
+    e.preventDefault()
+
+    const newRecord = {
+      record: this.state.record,
+      version_record: this.state.version_record,
+      ref_micro_record: this.state.ref_micro_record,
+      ref_device_record: this.state.ref_device_record
+    }
+
+    audiorecorder(newRecord).then(res => {
+      this.props.history.push(`/audiolist`)
+    })
   }
 
   stopRecording= () => {
@@ -20,7 +47,8 @@ class AudioRecorder extends Component {
 
   onSave=(blobObject) => {
     this.setState({
-      downloadLinkURL: blobObject.blobURL
+      downloadLinkURL: blobObject.blobURL,
+      blobObject: blobObject
     })
   }
 
@@ -29,7 +57,8 @@ class AudioRecorder extends Component {
   }
 
   onStop= (blobObject) => {
-    this.setState({ blobURL: blobObject.blobURL })
+    this.setState({ blobURL: blobObject.blobURL }),
+    this.setState({ blobOject: blobObject })
   }
 
   onData(recordedBlob){
@@ -63,6 +92,7 @@ class AudioRecorder extends Component {
     const {
       blobURL,
       downloadLinkURL,
+      blobObject,
       isRecording,
       recordingInSession,
       recordingStarted,
@@ -82,7 +112,7 @@ class AudioRecorder extends Component {
             <div id="overlay" />
             <div id="content">
               <h2>React-Mic</h2>
-              <h3>Record a .wav Audio File</h3>
+              <h3>Record a .wav Audio File of your voice</h3>
               <ReactMic
                 className="oscilloscope"
                 record={isRecording}
@@ -127,6 +157,49 @@ class AudioRecorder extends Component {
             <div id="audio-playback-controls">
               <audio ref="audioSource" controls="controls" src={blobURL} controlsList="nodownload"/>
             </div>
+          </div>
+          <div>
+            <h3>See the list of all your records</h3>
+            <form noValidate onSubmit={this.onSubmit}>
+              <input
+                type="hidden"
+                className="form-control"
+                name="record"
+                value={blobObject}
+                value={this.state.record}
+                onChange={this.onChange}
+              />
+              <input
+                type="hidden"
+                className="form-control"
+                name="version_record"
+                value="None"
+                value={this.state.version_record}
+                onChange={this.onChange}
+              />
+              <input
+                type="hidden"
+                className="form-control"
+                name="ref_micro_record"
+                value="None"
+                value={this.state.ref_micro_record}
+                onChange={this.onChange}
+              />
+              <input
+                type="hidden"
+                className="form-control"
+                name="ref_device_record"
+                value="None"
+                value={this.state.ref_device_record}
+                onChange={this.onChange}
+              />
+              <button
+                type="submit"
+                className="btn btn-lg btn-primary btn-block"
+              >
+                C'est parti
+              </button>
+            </form>
           </div>
         </div>
       </div>
