@@ -1,68 +1,32 @@
 import React, { Component } from 'react'
 import { ReactMic } from '../../../src'
 import jwt_decode from 'jwt-decode'
+import dom from 'dom'
 
 require('./styles.scss')
 
 class AudioList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      record: null
+
+  stateL = {
+    tabrecords: {
+      record : new Blob()
     }
   }
 
+  constructor(props) {
+    super(props)
+    /*this.state = {
+      record: new Blob()
+    }*/
+  }
+
   componentDidMount() {
-    const token = localStorage.usertoken
+    const token = localStorage.recordtoken
     const decoded = jwt_decode(token)
-    this.setState({
+    /*this.setState({
       record: decoded.record
-    })
-  }
-
-  stopRecording= () => {
-    this.setState({ isRecording: false })
-  }
-
-  onSave=(blobObject) => {
-    this.setState({
-      downloadLinkURL: blobObject.blobURL
-    })
-  }
-
-  onStart=() => {
-    console.log('You can tap into the onStart callback')
-  }
-
-  onStop= (blobObject) => {
-    this.setState({ blobURL: blobObject.blobURL })
-  }
-
-  onData(recordedBlob){
-    // console.log('ONDATA CALL IS BEING CALLED! ', recordedBlob);
-  }
-
-  onBlock() {
-    alert('ya blocked me!')
-  }
-
-  startRecording= () => {
-    this.setState({
-      isRecording: true,
-      recordingInSession: true,
-      recordingStarted: true,
-      recordingStopped: false,
-      isPaused: false
-    })
-  }
-
-  stopRecording=() => {
-    this.setState({
-      isRecording: false,
-      recordingInSession: false,
-      recordingStarted: false,
-      recordingStopped: true
-    })
+    })*/
+    this.stateL.tabrecords.record = decoded.record
   }
 
   render() {
@@ -87,12 +51,12 @@ class AudioList extends Component {
           <div id="project-container">
             <div id="overlay" />
             <div id="audio-playback-controls">
-              <audio ref="audioSource" controls="controls" src={this.state.record} controlsList="nodownload"/>
+              <audio ref="audioSource" controls="controls" src={this.stateL.tabrecords.record} controlsList="nodownload"/>
             </div>
             <div className="column download">
                   <a
                     className={downloadLink}
-                    href={this.state.record.blobURL}
+                    href={URL.createObjectURL(this.stateL.tabrecords.record)}
                     download={`recording.wav`}
                   />
                 </div>

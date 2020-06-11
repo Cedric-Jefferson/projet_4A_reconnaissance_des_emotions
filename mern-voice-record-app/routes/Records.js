@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 const Record = require('../models/Record')
 records.use(cors())
 
-process.env.SECRET_KEY = 'secret'
+process.env.SECRET_KEY = 'secret_rec'
 
 records.post('/audiorecorder', (req, res) => {
   
@@ -24,11 +24,11 @@ records.post('/audiorecorder', (req, res) => {
     }
   })
 
-    .then(record => {
-      if (record) {
+    .then(recorder => {
+      if (recorder) {
         Record.create(recordData)
-          .then(record => {
-            res.json({ status: record.record + ' is Registered!' })
+          .then(recorder => {
+            res.json({ status: recorder.record + ' is Registered!' })
           })
           .catch(err => {
             res.send('error: ' + err)
@@ -41,25 +41,23 @@ records.post('/audiorecorder', (req, res) => {
       res.send('error: ' + err)
     })
 
-    .then(recorder => {
-      if (recorder) {
-        if (bcrypt.compareSync(req.body.record, recorder.record)) {
-          let token = jwt.sign(recorder.dataValues, process.env.SECRET_KEY, {
-            expiresIn: 1440
-          })
-          res.send(token)
-        }
+    /*.then(record => {
+      if (record) {
+        let token = jwt.sign(record.dataValues, process.env.SECRET_KEY, {
+          expiresIn: 1440
+        })
+        res.send(token)
       } else {
-        res.status(400).json({ error: 'Recorder does not exist' })
+        res.status(400).json({ error: 'Record does not exist' })
       }
     })
     .catch(err => {
       res.status(400).json({ error: err })
-    })
+    })*/
 
 })
 
-records.get('/audiolist', (req, res) => {
+/*records.get('/audiolist', (req, res) => {
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   Record.findOne({
@@ -77,6 +75,6 @@ records.get('/audiolist', (req, res) => {
     .catch(err => {
       res.send('error: ' + err)
     })
-})
+})*/
 
 module.exports = records

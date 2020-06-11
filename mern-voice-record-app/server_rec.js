@@ -2,7 +2,7 @@ var express = require('express')
 var cors = require('cors')
 var bodyParser = require('body-parser')
 var app = express()
-var port = process.env.PORT || 5000
+var port = process.env.PORT || 4000
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -12,10 +12,8 @@ app.use(
   })
 )
 
-var Users = require('./routes/Users')
 var Records = require('./routes/Records')
 
-app.use('/users', Users)
 app.use('/records', Records)
 //app.use(express.static('./routes/Users'));
 

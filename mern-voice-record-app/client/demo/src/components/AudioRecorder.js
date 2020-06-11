@@ -5,19 +5,35 @@ import { audiorecorder } from './UserFunctions'
 require('./styles.scss')
 
 class AudioRecorder extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      downloadLinkURL: null,
-      blobObject: null,
-      isRecording: false,
-      recordingStarted: false,
-      recordingStopped: false,
-      record: null,
-      version_record: '',
+
+  stateT = {
+    tabrecords: {record : new Blob(),
+      version_record:'',
       ref_micro_record:'',
       ref_device_record:''
     }
+  };
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      //tabrecords : new Array(),
+      downloadLinkURL: null,
+      blobObject: new Blob(),
+      isRecording: false,
+      recordingStarted: false,
+      recordingStopped: false
+    }
+
+    var tabrecords = new Array();
+    tabrecords.state = {
+      record : new Blob(),
+      version_record:'',
+      ref_micro_record:'',
+      ref_device_record:''
+    }
+
+    console.log(tabrecords);
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -26,14 +42,27 @@ class AudioRecorder extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
+  onChangeRecord(e) {
+    this.stateT.tabrecords.record = e.target.value
+  }
+  onChangeVersion(e) {
+    this.stateT.tabrecords.version_record = e.target.value
+  }
+  onChangeRef_micro(e) {
+    this.stateT.tabrecords.ref_micro_record = e.target.value
+  }
+  onChangeRef_device(e) {
+    this.setState({ [e.target.name]: e.target.value })
+    this.stateT.tabrecords.ref_device_record = e.target.value
+  }
   onSubmit(e) {
     e.preventDefault()
 
     const newRecord = {
-      record: this.state.record,
-      version_record: this.state.version_record,
-      ref_micro_record: this.state.ref_micro_record,
-      ref_device_record: this.state.ref_device_record
+      record: this.stateT.tabrecords.record,
+      version_record: this.stateT.tabrecords.version_record,
+      ref_micro_record: this.stateT.tabrecords.ref_micro_record,
+      ref_device_record: this.stateT.tabrecords.ref_device_record
     }
 
     audiorecorder(newRecord).then(res => {
@@ -103,8 +132,6 @@ class AudioRecorder extends Component {
     const stopBtn = !recordingStarted ? "fa disabled fa-stop-circle" : "fa fa-stop-circle"
     const downloadLink = recordingStopped ? "fa fa-download" : "fa disabled fa-download"
 
-    const tabrecords = []; let i = 0;
-
     return (
       <div>
         <div id="project-wrapper">
@@ -166,32 +193,28 @@ class AudioRecorder extends Component {
                 className="form-control"
                 name="record"
                 value={blobObject}
-                value={this.state.record}
-                onChange={this.onChange}
+                onChange={this.onChangeRecord}
               />
               <input
                 type="hidden"
                 className="form-control"
                 name="version_record"
                 value="None"
-                value={this.state.version_record}
-                onChange={this.onChange}
+                onChange={this.onChangeVersion}
               />
               <input
                 type="hidden"
                 className="form-control"
                 name="ref_micro_record"
                 value="None"
-                value={this.state.ref_micro_record}
-                onChange={this.onChange}
+                onChange={this.onChangeRef_micro}
               />
               <input
                 type="hidden"
                 className="form-control"
                 name="ref_device_record"
                 value="None"
-                value={this.state.ref_device_record}
-                onChange={this.onChange}
+                onChange={this.onChangeRef_device}
               />
               <button
                 type="submit"
