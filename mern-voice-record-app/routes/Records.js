@@ -23,41 +23,46 @@ records.post('/audiorecorder', (req, res) => {
       record: req.body.record
     }
   })
-
-    .then(recorder => {
-      if (recorder) {
-        Record.create(recordData)
-          .then(recorder => {
-            res.json({ status: recorder.record + ' is Registered!' })
-          })
-          .catch(err => {
-            res.send('error: ' + err)
-          })
-      } else {
-        res.json({ error: 'Record already exists' })
-      }
-    })
-    .catch(err => {
-      res.send('error: ' + err)
-    })
-
-    /*.then(record => {
-      if (record) {
-        let token = jwt.sign(record.dataValues, process.env.SECRET_KEY, {
-          expiresIn: 1440
+  .then(record => {
+    if (!record) {
+      Record.create(recordData)
+        .then(record => {
+          res.json({ status: record.record + ' is Registered!' })
         })
-        res.send(token)
-      } else {
-        res.status(400).json({ error: 'Record does not exist' })
-      }
-    })
-    .catch(err => {
-      res.status(400).json({ error: err })
-    })*/
-
+        .catch(err => {
+          res.send('error: ' + err)
+        })
+    } else {
+      res.json({ error: 'Record already exists' })
+    }
+  })
+  .catch(err => {
+    res.send('error: ' + err)
+  })
 })
 
-/*records.get('/audiolist', (req, res) => {
+records.post('/audiocheck', (req, res) => {
+  Record.findOne({
+    where: {
+      record: req.body.record
+    }
+  })
+  .then(record => {
+    if (record) {
+      let token = jwt.sign(record.dataValues, process.env.SECRET_KEY, {
+        expiresIn: 1440
+      })
+      res.send(token)
+    } else {
+      res.status(400).json({ error: 'Record does not exist' })
+    }
+  })
+  .catch(err => {
+    res.status(400).json({ error: err })
+  })
+})
+
+records.get('/audiolist', (req, res) => {
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   Record.findOne({
@@ -75,6 +80,6 @@ records.post('/audiorecorder', (req, res) => {
     .catch(err => {
       res.send('error: ' + err)
     })
-})*/
+})
 
 module.exports = records

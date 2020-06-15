@@ -40,6 +40,7 @@ export const audiorecorder = newRecord => {
     })
     .then(response => {
       console.log('Record registered')
+      console.log(response.data)
       /*localStorage.setItem('recordtoken', response.data)
       return response.data*/
     })

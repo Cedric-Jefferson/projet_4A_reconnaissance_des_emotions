@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { ReactMic } from '../../../src'
-import { audiorecorder } from './UserFunctions'
+import { audiocheck } from './UserFunctions'
 
 require('./styles.scss')
 
-class AudioRecorder extends Component {
+class AudioCheck extends Component {
 
   /*stateT = {
     tabrecords: {record : new Blob(),
       version_record:'',
-      ref_micro_record:'',
-      ref_device_record:''
     }
   };*/
 
@@ -18,7 +16,7 @@ class AudioRecorder extends Component {
     super(props)
     this.state = {
       downloadLinkURL: null,
-      //blobObject: null,
+      //blobObject: new Blob(),
       isRecording: false,
       recordingStarted: false,
       recordingStopped: false,
@@ -34,9 +32,9 @@ class AudioRecorder extends Component {
       version_record:'',
       ref_micro_record:'',
       ref_device_record:''
-    }*/
+    }
 
-    //console.log(tabrecords);
+    console.log(tabrecords);*/
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -55,20 +53,23 @@ class AudioRecorder extends Component {
     this.stateT.tabrecords.ref_micro_record = e.target.value
   }
   onChangeRef_device(e) {
+    this.setState({ [e.target.name]: e.target.value })
     this.stateT.tabrecords.ref_device_record = e.target.value
   }*/
   onSubmit(e) {
     e.preventDefault()
 
-    const newRecord = {
+    const Record = {
       record: this.state.record,
       version_record: this.state.version_record,
-      ref_micro_record: this.state.ref_micro_record,
-      ref_device_record: this.state.ref_device_record
+      ref_mic_record: this.state.ref_micro_record,
+      ref_device_record: this.state.ref_device_record,
     }
 
-    audiorecorder(newRecord).then(res => {
-      this.props.history.push(`/audiocheck`)
+    audiocheck(Record).then(res => {
+        if (res) {
+          this.props.history.push(`/audiolist`)
+        }
     })
   }
 
@@ -231,4 +232,4 @@ class AudioRecorder extends Component {
   }
 }
 
-export default AudioRecorder
+export default AudioCheck

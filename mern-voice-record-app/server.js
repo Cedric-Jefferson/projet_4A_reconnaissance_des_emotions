@@ -13,10 +13,8 @@ app.use(
 )
 
 var Users = require('./routes/Users')
-var Records = require('./routes/Records')
 
 app.use('/users', Users)
-app.use('/records', Records)
 //app.use(express.static('./routes/Users'));
 
 /*app.options('./routes/Users/:id', cors()) // enable pre-flight request for DELETE request
