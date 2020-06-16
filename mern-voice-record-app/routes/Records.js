@@ -15,7 +15,7 @@ records.post('/audiorecorder', (req, res) => {
     record: req.body.record,
     version_record: req.body.version_record,
     ref_micro_record: req.body.ref_micro_record,
-    ref_device_record: req.body.ref_device_record,
+    ref_device_record: req.body.ref_device_record
   }
 
   Record.findOne({
@@ -27,7 +27,7 @@ records.post('/audiorecorder', (req, res) => {
     if (!record) {
       Record.create(recordData)
         .then(record => {
-          res.json({ status: record.record + ' is Registered!' })
+          res.json({ status: record.record + ' is then Registered!' })
         })
         .catch(err => {
           res.send('error: ' + err)

@@ -6,37 +6,18 @@ require('./styles.scss')
 
 class AudioRecorder extends Component {
 
-  /*stateT = {
-    tabrecords: {record : new Blob(),
-      version_record:'',
-      ref_micro_record:'',
-      ref_device_record:''
-    }
-  };*/
-
   constructor(props) {
     super(props)
     this.state = {
       downloadLinkURL: null,
-      //blobObject: null,
       isRecording: false,
       recordingStarted: false,
       recordingStopped: false,
       record : null,
-      version_record:'',
-      ref_micro_record:'',
-      ref_device_record:''
+      version_record:"None",
+      ref_micro_record:"None",
+      ref_device_record:"None"
     }
-
-    /*var tabrecords = new Array();
-    tabrecords.state = {
-      record : new Blob(),
-      version_record:'',
-      ref_micro_record:'',
-      ref_device_record:''
-    }*/
-
-    //console.log(tabrecords);
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -45,18 +26,7 @@ class AudioRecorder extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
-  /*onChangeRecord(e) {
-    this.stateT.tabrecords.record = e.target.value
-  }
-  onChangeVersion(e) {
-    this.stateT.tabrecords.version_record = e.target.value
-  }
-  onChangeRef_micro(e) {
-    this.stateT.tabrecords.ref_micro_record = e.target.value
-  }
-  onChangeRef_device(e) {
-    this.stateT.tabrecords.ref_device_record = e.target.value
-  }*/
+
   onSubmit(e) {
     e.preventDefault()
 
@@ -88,7 +58,15 @@ class AudioRecorder extends Component {
 
   onStop= (blobObject) => {
     this.setState({ blobURL: blobObject.blobURL }),
-    this.setState({ record: blobObject.blob })
+    this.setState({ record: blobObject.blobURL })
+  }
+
+  getRecord=() =>{
+    return this.state.record
+  }
+
+  getVersion=() =>{
+    return this.state.version_record
   }
 
   onData(recordedBlob){
@@ -190,32 +168,33 @@ class AudioRecorder extends Component {
             <h3>See the list of all your records</h3>
             <form noValidate onSubmit={this.onSubmit}>
               <input
-                type="hidden"
+                type="text"
+                hidden="true"
                 className="form-control"
                 name="record"
                 value={record}
                 onChange={this.onChange}
               />
               <input
-                type="hidden"
+                type="text"
+                hidden="true"
                 className="form-control"
                 name="version_record"
                 value="None"
-                onChange={this.onChange}
               />
               <input
-                type="hidden"
+                type="text"
+                hidden="true"
                 className="form-control"
                 name="ref_micro_record"
                 value="None"
-                onChange={this.onChange}
               />
               <input
-                type="hidden"
+                type="text"
+                hidden="true"
                 className="form-control"
                 name="ref_device_record"
                 value="None"
-                onChange={this.onChange}
               />
               <button
                 type="submit"

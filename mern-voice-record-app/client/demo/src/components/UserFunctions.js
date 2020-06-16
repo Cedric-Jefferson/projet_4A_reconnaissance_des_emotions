@@ -12,6 +12,7 @@ export const register = newUser => {
     })
     .then(response => {
       console.log('Registered')
+      console.log(response.data)
     })
 }
 
@@ -21,12 +22,12 @@ export const login = user => {
       email: user.email,
       password: user.password
     })
-    .then(response => {
-      localStorage.setItem('usertoken', response.data)
-      return response.data
+    .then(resp => {
+      localStorage.setItem('usertoken', resp.data)
+      return resp.data
     })
     .catch(err => {
-      console.log( err.response.request._response)
+      console.log( err.resp.request._response)
     })
 }
 
@@ -48,8 +49,9 @@ export const audiorecorder = newRecord => {
 
 export const audiocheck = recorder => {
   return axios
-    .post('http://localhost:4000/recorders/audiocheck', {
-      record: recorder.record
+    .post('http://localhost:4000/records/audiocheck', {
+      record: recorder.record,
+      version_record : recorder.version_record
     })
     .then(response => {
       localStorage.setItem('recordtoken', response.data)
