@@ -37,7 +37,8 @@ export const audiorecorder = newRecord => {
       record: newRecord.record,
       version_record: newRecord.version_record,
       ref_micro_record: newRecord.ref_micro_record,
-      ref_device_record: newRecord.ref_device_record
+      ref_device_record: newRecord.ref_device_record,
+      ref_record: newRecord.ref_record
     })
     .then(response => {
       console.log('Record registered')
@@ -47,11 +48,10 @@ export const audiorecorder = newRecord => {
     })
 }
 
-export const audiocheck = recorder => {
+export const audiocheck = record => {
   return axios
     .post('http://localhost:4000/records/audiocheck', {
-      record: recorder.record,
-      version_record : recorder.version_record
+      record: record.record
     })
     .then(response => {
       localStorage.setItem('recordtoken', response.data)

@@ -3,6 +3,7 @@ import { ReactMic } from '../../../src'
 import { audiocheck } from './UserFunctions'
 import AudioRecorder from './AudioRecorder'
 
+
 require('./styles.scss')
 
 class AudioCheck extends Component {
@@ -10,8 +11,7 @@ class AudioCheck extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      record : null,
-      version_record:"None",
+      record: null,
       errors: {}
     }
 
@@ -25,12 +25,11 @@ class AudioCheck extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    const Record = {
-      record: this.state.record,
-      version_record: this.state.version_record
+    const record = {
+      record: this.state.record
     }
 
-    audiocheck(Record).then(res => {
+    audiocheck(record).then(res => {
         if (res) {
           this.props.history.push(`/audiolist`)
         }
@@ -49,14 +48,7 @@ class AudioCheck extends Component {
                 hidden="true"
                 className="form-control"
                 name="record"
-                value="{AudioRecorder.getRecord}"
-              />
-              <input
-                type="text"
-                hidden="true"
-                className="form-control"
-                name="version_record"
-                value="{AudioRecorder.getVersion}"
+                value={AudioRecorder.state.record}
               />
               <button
                 type="submit"

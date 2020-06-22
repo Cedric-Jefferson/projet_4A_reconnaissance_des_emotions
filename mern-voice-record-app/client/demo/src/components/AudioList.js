@@ -16,9 +16,9 @@ class AudioList extends Component {
 
   componentDidMount() {
     const token = localStorage.recordtoken
-    const decoded = jwt_decode(token)
+    const decoded_r = jwt_decode(token)
     this.setState({
-      record: decoded.record,
+      record: decoded_r.record,
       i : 1
     })
   }
@@ -45,7 +45,7 @@ class AudioList extends Component {
                 <div className="column download">
                       <a
                         className={downloadLink}
-                        href={URL.createObjectURL(this.state.record)}
+                        href={this.state.record}
                         download={`recording.wav`}
                       />
                 </div>

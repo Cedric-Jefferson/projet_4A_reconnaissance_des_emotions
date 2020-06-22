@@ -20,6 +20,9 @@ module.exports = db.sequelize.define(
     },
     ref_device_record: {
       type: Sequelize.STRING
+    },
+    ref_record: {
+      type: Sequelize.STRING
     }
   },
   {

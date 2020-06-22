@@ -15,7 +15,8 @@ records.post('/audiorecorder', (req, res) => {
     record: req.body.record,
     version_record: req.body.version_record,
     ref_micro_record: req.body.ref_micro_record,
-    ref_device_record: req.body.ref_device_record
+    ref_device_record: req.body.ref_device_record,
+    ref_record: req.body.ref_record
   }
 
   Record.findOne({
@@ -54,7 +55,7 @@ records.post('/audiocheck', (req, res) => {
       })
       res.send(token)
     } else {
-      res.status(400).json({ error: 'Record does not exist' })
+      res.status(400).send({ error: 'Record does not exist' })
     }
   })
   .catch(err => {
@@ -63,11 +64,11 @@ records.post('/audiocheck', (req, res) => {
 })
 
 records.get('/audiolist', (req, res) => {
-  var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+  var decoded_r = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   Record.findOne({
     where: {
-      id: decoded.id
+      record: decoded_r.record
     }
   })
     .then(record => {

@@ -16,6 +16,7 @@
   "author": "Cedric Jefferson",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.698.0",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
@@ -23,6 +24,7 @@
     "http": "0.0.1-security",
     "jsonwebtoken": "^7.4.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "mysql": "^2.14.1",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.0",
